@@ -1,41 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS_GITLAB",
-      "label": "Prometheus Gitlab",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "10.2.2"
-    },
-    {
-      "type": "panel",
-      "id": "heatmap",
-      "name": "Heatmap",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -55,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -73,7 +35,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -128,7 +90,32 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "sum(delta(gitlab_runner_jobs_total [11m0s]))"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -153,7 +140,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(delta(gitlab_runner_jobs_total [$__rate_interval]))",
@@ -171,11 +158,12 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "green",
             "mode": "palette-classic"
           },
           "custom": {
@@ -185,9 +173,9 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "drawStyle": "line",
+            "fillOpacity": 61,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -195,6 +183,9 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -204,13 +195,14 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
           "mappings": [],
+          "noValue": "-",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -242,15 +234,15 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(delta(gitlab_runner_failed_jobs_total[$__rate_interval])) by (failure_reason)",
@@ -259,6 +251,19 @@
           "legendFormat": "{{failure_reason}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(delta(gitlab_runner_jobs_total [$__rate_interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "total",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Runner failed jobs",
@@ -267,7 +272,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -346,7 +351,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(increase(gitlab_runner_errors_total[$__rate_interval])) by (level)",
@@ -363,7 +368,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -378,7 +383,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "bars",
-            "fillOpacity": 0,
+            "fillOpacity": 63,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -403,6 +408,7 @@
             }
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -449,7 +455,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -471,7 +477,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -534,7 +540,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -552,7 +558,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -615,7 +621,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum by (le) (\n  increase(gitlab_runner_job_queue_duration_seconds_bucket{}[$__rate_interval])\n)\n",
@@ -645,7 +651,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -724,7 +730,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "increase(gitlab_auth_user_authenticated_total[$__rate_interval])",
@@ -740,7 +746,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -819,7 +825,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(gitlab_auth_user_unauthenticated_total{})",
@@ -832,7 +838,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(delta(gitlab_auth_user_unauthenticated_total{}[$__rate_interval]))",
@@ -849,7 +855,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -930,7 +936,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -945,7 +951,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -960,7 +966,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -979,7 +985,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS_GITLAB}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1042,7 +1048,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_GITLAB}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum by (le) (\n  increase(http_request_duration_seconds_bucket{}[$__rate_interval])\n)\n",
@@ -1061,16 +1067,36 @@
   "schemaVersion": 38,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "PrometheusGitlab",
+          "value": "PE1DEC18E6B82D138"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
   },
   "time": {
-    "from": "now-24h",
-    "to": "now"
+    "from": "2024-03-19T08:07:37.976Z",
+    "to": "2024-03-19T19:14:42.629Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Gitlab",
   "uid": "a4158d02-c18a-46ae-b764-e8094399d6bc",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }
