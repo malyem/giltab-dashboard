@@ -28,6 +28,356 @@
         "x": 0,
         "y": 0
       },
+      "id": 16,
+      "title": "Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 0,
+        "y": 1
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(gitaly_total_repositories_count)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Repositories",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 2,
+        "y": 1
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "count(gitlab_runner_concurrent)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Runners",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Database connections pools",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PE1DEC18E6B82D138"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "10.2.2",
+      "repeat": "gitlab_database_connection_pool",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "max(gitlab_database_connection_pool_size{app=\"$gitlab_database_connection_pool\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "pool size",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "avg(avg_over_time(gitlab_database_connection_pool_connections{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "connections",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "avg(avg_over_time(gitlab_database_connection_pool_busy{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "busy",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "avg(avg_over_time(gitlab_database_connection_pool_dead{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "dead",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "avg(avg_over_time(gitlab_database_connection_pool_idle{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "idle",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE1DEC18E6B82D138"
+          },
+          "editorMode": "code",
+          "expr": "avg(avg_over_time(gitlab_database_connection_pool_waiting{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "waiting",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "$gitlab_database_connection_pool",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
       "id": 10,
       "title": "Runner jobs",
       "type": "row"
@@ -121,7 +471,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 1
+        "y": 15
       },
       "id": 2,
       "options": {
@@ -223,7 +573,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 15
       },
       "id": 4,
       "options": {
@@ -332,7 +682,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 23
       },
       "id": 5,
       "options": {
@@ -430,7 +780,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 23
       },
       "id": 1,
       "options": {
@@ -498,7 +848,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 31
       },
       "id": 12,
       "options": {
@@ -579,7 +929,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 17
+        "y": 31
       },
       "id": 11,
       "options": {
@@ -641,7 +991,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 39
       },
       "id": 9,
       "panels": [],
@@ -711,7 +1061,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 40
       },
       "id": 3,
       "options": {
@@ -806,7 +1156,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 40
       },
       "id": 6,
       "options": {
@@ -915,7 +1265,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 34
+        "y": 48
       },
       "id": 7,
       "options": {
@@ -1006,7 +1356,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 34
+        "y": 48
       },
       "id": 13,
       "options": {
@@ -1061,104 +1411,9 @@
       ],
       "title": "Request duration",
       "type": "heatmap"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 61,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 42
-      },
-      "id": 14,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(authenticated_user_requests{}[$__rate_interval])) by (username)",
-          "instant": false,
-          "legendFormat": "{{username}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Authenticated user requests",
-      "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 38,
   "tags": [],
   "templating": {
@@ -1181,6 +1436,39 @@
         "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(gitlab_database_connection_pool_size,app)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "DB pool",
+        "multi": true,
+        "name": "gitlab_database_connection_pool",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(gitlab_database_connection_pool_size,app)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
