@@ -1,1 +1,1 @@
-# giltab-dashboard
+# gitlab-dashboard
