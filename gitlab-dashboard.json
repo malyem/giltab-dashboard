@@ -1258,11 +1258,6 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "PrometheusGitlab",
-          "value": "PE1DEC18E6B82D138"
-        },
         "hide": 0,
         "includeAll": false,
         "label": "Datasource",
@@ -1285,7 +1280,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUSGITLAB}"
+          "uid": "${datasource}"
         },
         "definition": "label_values(gitlab_database_connection_pool_size,app)",
         "hide": 0,
