@@ -33,10 +33,6 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -84,10 +80,6 @@
       "pluginVersion": "10.2.2",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
-          },
           "editorMode": "code",
           "exemplar": false,
           "expr": "max(gitaly_total_repositories_count)",
@@ -154,7 +146,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "count(gitlab_runner_concurrent)",
@@ -183,7 +175,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PE1DEC18E6B82D138"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -291,7 +283,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "max(gitlab_database_connection_pool_size{app=\"$gitlab_database_connection_pool\"})",
@@ -304,7 +296,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "avg(avg_over_time(gitlab_database_connection_pool_connections{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
@@ -317,7 +309,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "avg(avg_over_time(gitlab_database_connection_pool_busy{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
@@ -330,7 +322,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "avg(avg_over_time(gitlab_database_connection_pool_dead{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
@@ -343,7 +335,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "avg(avg_over_time(gitlab_database_connection_pool_idle{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
@@ -356,7 +348,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PE1DEC18E6B82D138"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "avg(avg_over_time(gitlab_database_connection_pool_waiting{app=\"$gitlab_database_connection_pool\"}[$__interval]))",
@@ -381,129 +373,6 @@
       "id": 10,
       "title": "Runner jobs",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 46,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "always",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "sum(delta(gitlab_runner_jobs_total [11m0s]))"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 15
-      },
-      "id": 2,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(delta(gitlab_runner_jobs_total [$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "interval": "5m",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Job executed",
-      "type": "timeseries"
     },
     {
       "datasource": {
@@ -572,7 +441,7 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
+        "x": 0,
         "y": 15
       },
       "id": 4,
@@ -616,103 +485,7 @@
           "refId": "B"
         }
       ],
-      "title": "Runner failed jobs",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 23
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(increase(gitlab_runner_errors_total[$__rate_interval])) by (level)",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "Runner errors",
+      "title": "Runner jobs results",
       "type": "timeseries"
     },
     {
@@ -780,7 +553,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 23
+        "y": 15
       },
       "id": 1,
       "options": {
@@ -848,7 +621,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 31
+        "y": 23
       },
       "id": 12,
       "options": {
@@ -929,7 +702,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 31
+        "y": 23
       },
       "id": 11,
       "options": {
@@ -984,6 +757,102 @@
       ],
       "title": "Runner job queue durations",
       "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(gitlab_runner_errors_total[$__rate_interval])) by (level)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Runner errors",
+      "type": "timeseries"
     },
     {
       "collapsed": false,
@@ -1290,37 +1159,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(delta(http_requests_total[10m:5m])) by (status)",
-          "format": "time_series",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "{{status}}",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "rate(http_requests_total[2m])",
-          "format": "time_series",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "{{status}}",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(delta(http_requests_total[$__rate_interval:$__rate_interval])) by (status)",
+          "expr": "sum(delta(http_requests_total[$__rate_interval])) by (status)",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1413,7 +1252,7 @@
       "type": "heatmap"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 38,
   "tags": [],
   "templating": {
@@ -1441,16 +1280,12 @@
         "allValue": "",
         "current": {
           "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": [],
+          "value": []
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${DS_PROMETHEUSGITLAB}"
         },
         "definition": "label_values(gitlab_database_connection_pool_size,app)",
         "hide": 0,
@@ -1480,6 +1315,6 @@
   "timezone": "",
   "title": "Gitlab",
   "uid": "a4158d02-c18a-46ae-b764-e8094399d6bc",
-  "version": 1,
+  "version": 32,
   "weekStart": ""
 }
